@@ -1,0 +1,325 @@
+/* ===============
+   Estilos Globais
+   =============== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+:root {
+  --cor-branco: #ffffff;
+  --cor-bege: #f9f4e8;
+  --cor-dourado: #d4af37;
+  --cor-rosa-suave: #f8d7da;
+  --sombra-dourada: 0 4px 12px rgba(212, 175, 55, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cor-bege);
+  color: #333;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, .btn {
+  background-color: var(--cor-dourado);
+  color: var(--cor-branco);
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--sombra-dourada);
+}
+
+button:hover {
+  background-color: #c19a2e;
+  transform: translateY(-2px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ===============
+   Cabeçalho Fixo
+   =============== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  gap: 1.5rem;
+}
+
+nav a {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background-color: var(--cor-dourado);
+  color: white;
+}
+
+/* ===============
+   Página de Entrada
+   =============== */
+#entrada {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(circle, var(--cor-bege) 0%, #f0e6d2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+#entrada h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeInTitle 2s forwards;
+}
+
+#entrada p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  color: #555;
+  opacity: 0;
+  animation: fadeInText 2s 0.5s forwards;
+}
+
+@keyframes fadeInTitle {
+  to { opacity: 1; }
+}
+
+@keyframes fadeInText {
+  to { opacity: 1; }
+}
+
+.light {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: -1;
+  animation: floatLight 15s infinite ease-in-out;
+}
+
+.light:nth-child(2) {
+  top: 20%;
+  left: 10%;
+  animation-delay: -5s;
+  width: 200px;
+  height: 200px;
+}
+
+.light:nth-child(3) {
+  bottom: 10%;
+  right: 15%;
+  animation-delay: -10s;
+  width: 250px;
+  height: 250px;
+}
+
+@keyframes floatLight {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(20px, 30px); }
+  50% { transform: translate(-20px, 20px); }
+  75% { transform: translate(10px, -20px); }
+}
+
+/* ===============
+   Galeria
+   =============== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.frame {
+  background: white;
+  border: 8px solid var(--cor-dourado);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: var(--sombra-dourada);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.frame:hover {
+  transform: scale(1.05);
+}
+
+.frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.frame figcaption {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Lightbox */
+#lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#lightbox.active {
+  display: flex;
+  opacity: 1;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border: 12px solid var(--cor-dourado);
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgba(212,175,55,0.5);
+}
+
+#close-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* ===============
+   Cartas
+   =============== */
+.letters {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f9f4e8"/><path d="M0 0L100 100M100 0L0 100" stroke="%23e8e0d5" stroke-width="0.5"/></svg>');
+  padding: 3rem 0;
+}
+
+.letter-card {
+  background: #fdf9f0;
+  border: 2px solid var(--cor-dourado);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.letter-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bible-quote {
+  text-align: center;
+  font-style: italic;
+  margin-top: 2rem;
+  color: #5a4a2e;
+  font-size: 1.2rem;
+}
+
+/* ===============
+   Encerramento
+   =============== */
+#encerramento {
+  text-align: center;
+  padding: 4rem 1.5rem;
+}
+
+#encerramento h1 {
+  margin-bottom: 1.5rem;
+}
+
+#encerramento p {
+  font-size: 1.3rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: #444;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--cor-dourado);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+/* ===============
+   Responsividade
+   =============== */
+@media (max-width: 768px) {
+  #entrada h1 {
+    font-size: 2.5rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .gallery-grid,
+  .achievements-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
